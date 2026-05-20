@@ -4,40 +4,38 @@ import com.skinmarket.model.User;
 import com.skinmarket.util.DBConnection;
 
 import java.sql.*;
-import java.util.Optional;
-
 public class UserDaoImpl implements UserDao {
 
     @Override
-    public Optional<User> findByUsername(String username) {
+    public User findByUsername(String username) {
         String sql = "SELECT id, username, password_hash, email, role, avatar_path, steam_id, trade_link, is_active, created_at, updated_at FROM users WHERE username = ?";
         try (Connection conn = DBConnection.DbConnect();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                return Optional.of(mapUser(rs));
+                return mapUser(rs);
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return Optional.empty();
+        return null;
     }
 
     @Override
-    public Optional<User> findById(int id) {
+    public User findById(int id) {
         String sql = "SELECT id, username, password_hash, email, role, avatar_path, steam_id, trade_link, is_active, created_at, updated_at FROM users WHERE id = ?";
         try (Connection conn = DBConnection.DbConnect();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                return Optional.of(mapUser(rs));
+                return mapUser(rs);
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return Optional.empty();
+        return null;
     }
 
     @Override
@@ -94,11 +92,12 @@ public class UserDaoImpl implements UserDao {
     }
 
     private User mapUser(ResultSet rs) throws SQLException {
-        User user = new User();
+        String userName = rs.getString("username");
+        String passwordHash = rs.getString("password_hash");
+        String email = rs.getString("email");
+
+        User user = new User(userName, passwordHash, email);
         user.setId(rs.getInt("id"));
-        user.setUserName(rs.getString("username"));
-        user.setPasswordHash(rs.getString("password_hash"));
-        user.setEmail(rs.getString("email"));
         user.setRole(rs.getString("role"));
         user.setAvatarPath(rs.getString("avatar_path"));
         user.setSteamId(rs.getString("steam_id"));

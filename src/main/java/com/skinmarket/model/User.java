@@ -17,7 +17,7 @@ public class User {
 
     public User(String userName, String passwordHash, String email){
         this.userName = userName;
-        this.passwordHash = userName;
+        this.passwordHash = passwordHash;
         this.email = email;
         this.role = "User";
         this.isActive = true;
