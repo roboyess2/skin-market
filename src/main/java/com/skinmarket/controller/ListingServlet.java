@@ -37,6 +37,12 @@ public class ListingServlet extends HttpServlet {
         if ("/listings".equals(path)) {
             // Показать все активные объявления
             List<Listing> listings = listingService.getActiveListings();
+
+            for (Listing listing : listings) {
+                List<ListingImage> images = listingService.getImages(listing.getId());
+                listing.setImages(images);
+            }
+
             req.setAttribute("listings", listings);
             req.getRequestDispatcher("/WEB-INF/views/listings.jsp").forward(req, resp);
 

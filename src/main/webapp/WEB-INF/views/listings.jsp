@@ -30,11 +30,12 @@
             <c:forEach var="listing" items="${listings}">
                 <div class="listing-card">
                     <c:if test="${not empty listing.images}">
-                        <c:forEach var="image" items="${listing.images}" varStatus="status">
-                            <c:if test="${status.first}">
-                                <img src="${pageContext.request.contextPath}/uploads/${image.imagePath}" alt="${listing.title}">
-                            </c:if>
-                        </c:forEach>
+                        <img src="${pageContext.request.contextPath}/uploads/${listing.images[0].imagePath}" alt="${listing.title}">
+                    </c:if>
+                    <c:if test="${empty listing.images}">
+                        <div style="width:100%;height:200px;background:#333;border-radius:5px;display:flex;align-items:center;justify-content:center;">
+                            <span style="color:#888;">Нет фото</span>
+                        </div>
                     </c:if>
                     <h3>${listing.title}</h3>
                     <c:if test="${listing.sellerType == 'SITE'}">

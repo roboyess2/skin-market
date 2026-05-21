@@ -1,6 +1,7 @@
 package com.skinmarket.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class Listing {
     private Integer id;
@@ -17,9 +18,18 @@ public class Listing {
     private String stickerInfo;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private List<ListingImage> images;
 
     public Listing() {}
 
+
+    public List<ListingImage> getImages() {
+        return images;
+    }
+
+    public void setImages(List<ListingImage> images) {
+        this.images = images;
+    }
 
     public Integer getId() {
         return id;
