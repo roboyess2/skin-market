@@ -1,0 +1,186 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+}
+
+a {
+    color: #4da6ff;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+a:hover {
+    color: #82c4ff;
+}
+
+.header {
+    background-color: #2a2a2a;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-left a, .nav-right a {
+    color: #e0e0e0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.listing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.listing-card {
+    background-color: #2a2a2a;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+}
+
+.listing-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.listing-card h3 {
+    margin: 10px 0;
+    color: #4da6ff;
+}
+
+.price {
+    color: #4caf50;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.status {
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+}
+
+.status-active { background-color: #4caf50; color: white; }
+.status-frozen { background-color: #ff9800; color: white; }
+.status-deleted { background-color: #f44336; color: white; }
+.status-sold { background-color: #2196f3; color: white; }
+
+.form-container {
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #2a2a2a;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #b0b0b0;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #444;
+    border-radius: 5px;
+    background-color: #333;
+    color: #e0e0e0;
+    box-sizing: border-box;
+}
+
+.form-group textarea {
+    height: 150px;
+    resize: vertical;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn-primary {
+    background-color: #4caf50;
+    color: white;
+}
+
+.btn-danger {
+    background-color: #f44336;
+    color: white;
+}
+
+.btn-warning {
+    background-color: #ff9800;
+    color: white;
+}
+
+.error {
+    color: #f44336;
+    background-color: #3a1a1a;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.success {
+    color: #4caf50;
+    background-color: #1a3a1a;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #2a2a2a;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #444;
+}
+
+table th {
+    background-color: #333;
+    color: #4da6ff;
+}
+
+table tr:hover {
+    background-color: #3a3a3a;
+}
+
+.article-content {
+    background-color: #2a2a2a;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+    line-height: 1.6;
+}
