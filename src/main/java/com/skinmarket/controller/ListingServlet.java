@@ -90,6 +90,7 @@ public class ListingServlet extends HttpServlet {
             double price = Double.parseDouble(req.getParameter("price"));
 
             Listing listing = new Listing();
+            listing.setSellerId(user.getId());
             listing.setTitle(title);
             listing.setDescription(description);
             listing.setPrice(price);

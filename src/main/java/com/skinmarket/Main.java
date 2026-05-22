@@ -8,6 +8,7 @@ import com.skinmarket.util.DatabaseMigrator;
 public class Main {
     public static void main(String[] args) {
         try {
+            Class.forName("org.postgresql.Driver");
             DBConnection.DbConnect();
             DatabaseMigrator.migrate();
         }

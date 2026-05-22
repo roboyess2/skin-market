@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="com.skinmarket.model.User" %>
 <html>
 <head>
     <title>Skin Market - Главная</title>
@@ -13,22 +13,24 @@
                     <a href="${pageContext.request.contextPath}/home">Главная</a>
                     <a href="${pageContext.request.contextPath}/listings">Скины</a>
                     <a href="${pageContext.request.contextPath}/articles">Статьи</a>
-                    <c:if test="${sessionScope.user.role == 'MODERATOR'}">
+                    <%
+                        User user = (User) session.getAttribute("user");
+                        if (user != null && "MODERATOR".equals(user.getRole())) {
+                    %>
                         <a href="${pageContext.request.contextPath}/moderator">Панель модератора</a>
-                    </c:if>
+                    <% } %>
                 </div>
                 <div class="nav-right">
-                    <c:choose>
-                        <c:when test="${not empty sessionScope.user}">
-                            <span>${sessionScope.user.username} (${sessionScope.user.role})</span>
-                            <a href="${pageContext.request.contextPath}/my-listings">Мои объявления</a>
-                            <a href="${pageContext.request.contextPath}/logout">Выйти</a>
-                        </c:when>
-                        <c:otherwise>
-                            <a href="${pageContext.request.contextPath}/login">Войти</a>
-                            <a href="${pageContext.request.contextPath}/register">Регистрация</a>
-                        </c:otherwise>
-                    </c:choose>
+                    <%
+                        if (user != null) {
+                    %>
+                        <span><%= user.getUserName() %> (<%= user.getRole() %>)</span>
+                        <a href="${pageContext.request.contextPath}/my-listings">Мои объявления</a>
+                        <a href="${pageContext.request.contextPath}/logout">Выйти</a>
+                    <% } else { %>
+                        <a href="${pageContext.request.contextPath}/login">Войти</a>
+                        <a href="${pageContext.request.contextPath}/register">Регистрация</a>
+                    <% } %>
                 </div>
             </div>
         </div>

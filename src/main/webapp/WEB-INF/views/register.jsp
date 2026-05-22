@@ -1,5 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <title>Регистрация</title>
@@ -10,9 +9,9 @@
         <div class="form-container">
             <h2>Регистрация</h2>
 
-            <c:if test="${not empty error}">
-                <div class="error">${error}</div>
-            </c:if>
+            <% if (request.getAttribute("error") != null) { %>
+                <div class="error"><%= request.getAttribute("error") %></div>
+            <% } %>
 
             <form method="post" action="${pageContext.request.contextPath}/register">
                 <div class="form-group">
