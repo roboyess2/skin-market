@@ -82,8 +82,11 @@
                             <cargo.servlet.port>8080</cargo.servlet.port>
                             <cargo.jvmargs>
                                 -Dfile.encoding=UTF-8
-                                -Dsun.jnu.encoding=UTF-8
-                                -Dconsole.encoding=UTF-8
+                                -Djavax.servlet.request.encoding=UTF-8
+                                -Dcatalina.connector.URI_ENCODING=UTF-8
+                                -Dorg.apache.catalina.connector.URI_ENCODING=UTF-8
+                                -Dorg.apache.tomcat.util.buf.UDecoder.ALLOW_ENCODED_SLASH=true
+                                -Dorg.apache.tomcat.util.http.Parameters.MAX_COUNT=1000
                             </cargo.jvmargs>
                         </properties>
                     </configuration>
