@@ -72,7 +72,9 @@ public class ModeratorArticleServlet extends HttpServlet {
             }
 
             article.setTitle(title);
+            System.out.println(title);
             article.setContent(content);
+            System.out.println(content);
             article.setAuthorId(user.getId());
 
             if (idParam != null && !idParam.isEmpty()) {

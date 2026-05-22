@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class DBConnection {
 
-    private static final String DB_URL = "jdbc:postgresql://localhost:5432/skinmarket";
+    private static final String DB_URL = "jdbc:postgresql://localhost:5432/skinmarket?useUnicode=true&characterEncoding=UTF-8";
     private static final String USER_NAME = "postgres";
     private static final String PASSWORD = "fulful89";
 

@@ -18,7 +18,7 @@
                 <div class="error">${error}</div>
             </c:if>
 
-            <form method="post" action="${pageContext.request.contextPath}/listing/create" enctype="multipart/form-data">
+            <form method="post" action="${pageContext.request.contextPath}/listing/create" enctype="multipart/form-data" accept-charset="UTF-8">
                 <div class="form-group">
                     <label>Название скина:</label>
                     <input type="text" name="title" required>
