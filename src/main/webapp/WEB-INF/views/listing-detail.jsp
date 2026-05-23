@@ -24,8 +24,9 @@
 
         <div style="display: flex; gap: 10px; margin: 20px 0;">
             <c:forEach var="image" items="${images}">
-                <img src="${pageContext.request.contextPath}/uploads/${image.imagePath}"
-                     style="width: 300px; height: 200px; object-fit: cover; border-radius: 5px;">
+                <img src="${pageContext.request.contextPath}/image/${image.imagePath}"
+                             alt="${listing.title}"
+                             style="max-width:100%; max-height:500px; border-radius:10px; margin:20px 0;">
             </c:forEach>
         </div>
 

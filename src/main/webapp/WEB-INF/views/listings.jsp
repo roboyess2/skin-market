@@ -30,7 +30,10 @@
             <c:forEach var="listing" items="${listings}">
                 <div class="listing-card">
                     <c:if test="${not empty listing.images}">
-                        <img src="${pageContext.request.contextPath}/uploads/${listing.images[0].imagePath}" alt="${listing.title}">
+                        <%-- БЕРЁМ ФАЙЛЫ ИЗ A:\UPLOADS ЧЕРЕЗ СЕРВЛЕТ --%>
+                        <img src="${pageContext.request.contextPath}/image/${listing.images[0].imagePath}"
+                             alt="${listing.title}"
+                             style="width:100%; height:200px; object-fit:cover; border-radius:5px;">
                     </c:if>
                     <c:if test="${empty listing.images}">
                         <div style="width:100%;height:200px;background:#333;border-radius:5px;display:flex;align-items:center;justify-content:center;">

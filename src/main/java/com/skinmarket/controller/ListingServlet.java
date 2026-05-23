@@ -11,7 +11,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,7 +21,7 @@ import java.util.UUID;
 @MultipartConfig(
         fileSizeThreshold = 1024 * 1024,      // 1 MB
         maxFileSize = 1024 * 1024 * 10,       // 10 MB
-        maxRequestSize = 1024 * 1024 * 15     // 15 MB
+        maxRequestSize = 1024 * 1024 * 50     // 50 MB
 )
 public class ListingServlet extends HttpServlet {
     private ListingService listingService;
@@ -89,30 +91,40 @@ public class ListingServlet extends HttpServlet {
             String description = req.getParameter("description");
             double price = Double.parseDouble(req.getParameter("price"));
 
+            Collection<Part> fileParts = req.getParts();
+            List<String> savedPaths = new ArrayList<>();
+
+            // ПАПКА ДЛЯ СОХРАНЕНИЯ
+            String uploadPath = "A:/uploads/listings/";
+
+            File uploadDir = new File(uploadPath);
+            if (!uploadDir.exists()) uploadDir.mkdirs();
+
+            System.out.println("Upload to: " + uploadPath);
+
+            for (Part part : fileParts) {
+                if (part.getName().equals("images") && part.getSize() > 0) {
+                    String fileName = UUID.randomUUID().toString() + "_" + Paths.get(part.getSubmittedFileName()).getFileName();
+                    String filePath = uploadPath + fileName;
+                    part.write(filePath);
+
+                    savedPaths.add("listings/" + fileName);
+                    System.out.println("Saved file: " + filePath);
+                    System.out.println("Full path: " + filePath);
+                }
+            }
+
             Listing listing = new Listing();
             listing.setSellerId(user.getId());
             listing.setTitle(title);
             listing.setDescription(description);
             listing.setPrice(price);
 
-            // Загрузка изображений
-            List<String> imagePaths = new ArrayList<>();
-            String uploadPath = getServletContext().getRealPath("") + "uploads";
-            File uploadDir = new File(uploadPath);
-            if (!uploadDir.exists()) uploadDir.mkdir();
-
-            for (Part part : req.getParts()) {
-                if (part.getName().equals("images") && part.getSize() > 0) {
-                    String fileName = UUID.randomUUID().toString() + "_" + getSubmittedFileName(part);
-                    part.write(uploadPath + File.separator + fileName);
-                    imagePaths.add(fileName);
-                }
-            }
-
             try {
-                listingService.createUserListing(listing, imagePaths);
-                resp.sendRedirect(req.getContextPath() + "/my-listings");
+                listingService.createUserListing(listing, savedPaths);
+                resp.sendRedirect(req.getContextPath() + "/listings?success=created");
             } catch (Exception e) {
+                e.printStackTrace();
                 req.setAttribute("error", e.getMessage());
                 req.getRequestDispatcher("/WEB-INF/views/create-listing.jsp").forward(req, resp);
             }
